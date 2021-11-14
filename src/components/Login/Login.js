@@ -11,6 +11,8 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
+  //So the reason why the login is still disabled is because, the useEffect only ran once, on the first keystroke of the email, because that triggered a rerender, meaning formIsValid is still false
+  //We need it to run every time the email and password is changed so that we get to the end of the email and password AND THEN we setFormIsValid and then the login button will be enabled.
   useEffect(() => {
     console.log('form set to VALID')
     setFormIsValid(
