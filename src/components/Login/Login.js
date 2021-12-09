@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer, useContext } from 'react';
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
-import AuthContext from '.../store/auth-context';
+import AuthContext from '../../store/auth-context';
 
 
 
