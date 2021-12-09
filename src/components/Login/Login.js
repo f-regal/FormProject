@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useReducer } from 'react';
-
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
+import AuthContext from '.../store/auth-context';
+
+
 
 const emailReducer = (state, action) => {
   //We are checking when the User Input changed, and when it did, we are updating our states for value and validity with the payload from the action 'action.val'
@@ -34,10 +36,6 @@ const Login = (props) => {
   //const [enteredPassword, setEnteredPassword] = useState('');
   //const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
-
-
-
-
   const [emailState, dispatchEmail] = useReducer(emailReducer, {value: '', isValid: null});
   const [passwordState, dispatchPassword] = useReducer(passwordReducer, {value: '', isValid: null});
 
@@ -46,6 +44,8 @@ const Login = (props) => {
   // setFormIsValid runs once, when the app first renders. It checks the condition once. We need it to check the condition for every keystroke, so we need to put enteredEmail
   // and enteredPassword as dependencies so that the useEffect code runs once the app re-renders IF those dependencies change (which they will on every keystroke)
    
+
+  const AuthCtx = useContext(AuthContext);
   const {isValid: emailIsValid} = emailState;
   const {isValid: passwordIsValid} = passwordState;
 
@@ -91,7 +91,7 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onLogin(emailState.value, passwordState.value);
+    AuthCtx.onLogin(emailState.value, passwordState.value);
   };
 
   return (
